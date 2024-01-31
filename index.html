@@ -2,9 +2,24 @@
 <html>
 <head>
   <title>HyperSec</title>
-    
+  <script src="server.js"></script>
+  <script>
+  function logUser() {
+    fetch('/log', { method: 'POST' })
+      .then((response) => {
+        if (response.ok) {
+          console.log('User info logged successfully');
+        } else {
+          console.error('Error logging user info');
+        }
+      })
+      .catch((error) => {
+        console.error('Error logging user info:', error);
+      });
+  }
+</script>
 </head>
-<body onload="logIP()">
+<body onload="logUser()">
   <h1>My portfolio!</h1>
 </body>
 </html>
