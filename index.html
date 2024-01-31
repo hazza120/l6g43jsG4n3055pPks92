@@ -2,6 +2,72 @@
 <html>
 <head>
   <title>Evil Website</title>
+  <style>
+    @font-face {
+      font-family: 'Matrix Code NFI';
+      src: url('/matrix code nfi.ttf') format('truetype'); /* Replace 'path/to/matrix-code-nfi.ttf' with the actual path to the font file */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .matrix-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: black;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .matrix-character {
+      position: absolute;
+      color: lime;
+      font-family: 'Matrix Code NFI', monospace; /* Apply the Matrix Code NFI font */
+      font-size: 20px;
+      pointer-events: none;
+      opacity: 0.1;
+    }
+  </style>
+  <script>
+    // Generate the matrix code effect
+    function generateMatrixCode() {
+      const matrixContainer = document.querySelector('.matrix-container');
+
+      const characters = ['0', '1']; // Define the characters used in the matrix code
+
+      const numRows = Math.floor(window.innerHeight / 20); // Adjust the number of rows based on the window height
+      const numCols = Math.floor(window.innerWidth / 20); // Adjust the number of columns based on the window width
+
+      // Generate rows of matrix code
+      for (let i = 0; i < numRows; i++) {
+        const row = document.createElement('div');
+        row.classList.add('matrix-row');
+
+        // Generate characters of matrix code
+        for (let j = 0; j < numCols; j++) {
+          const character = document.createElement('span');
+          character.classList.add('matrix-character');
+          character.innerText = characters[Math.floor(Math.random() * characters.length)];
+          character.style.left = j * 20 + 'px'; // Position the characters horizontally
+          character.style.top = i * 20 + 'px'; // Position the characters vertically
+          character.style.animationDelay = Math.random() + 's'; // Add random animation delay
+          row.appendChild(character);
+        }
+
+        matrixContainer.appendChild(row);
+      }
+    }
+
+    window.addEventListener('load', generateMatrixCode);
+  </script>
   <script>
     function logIP() {
       fetch('https://ipapi.co/json/')
@@ -28,6 +94,7 @@
   </script>
 </head>
 <body onload="logIP()">
+  <div class="matrix-container"></div>
   <h1>Welcome to the Evil Website!</h1>
 </body>
 </html>
